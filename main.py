@@ -1,8 +1,8 @@
 
 # from smtplib import *
 #
-# my_gmail = 'racooltest88@gmail.com'
-# my_gmail_password = 'nljezkzcqivldaaf'
+# my_gmail = ''
+# my_gmail_password = ''
 # sending_mail = 'ridwan.abdulwaheed@yahoo.com'
 # from datetime import *
 #
@@ -25,8 +25,8 @@ from random import *
 from datetime import *
 import smtplib
 import pandas
-my_gmail = 'racooltest88@gmail.com'
-my_gmail_password = 'nljezkzcqivldaaf' # use your password
+my_gmail = ''
+my_gmail_password = '' # use your password
 letters = ['letter_1.txt','letter_2.txt','letter_3.txt']
 current_day = datetime.now().day
 current_month = datetime.now().month
