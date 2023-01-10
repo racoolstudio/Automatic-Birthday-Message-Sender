@@ -2,7 +2,7 @@
 # from smtplib import *
 #
 # my_gmail = 'racooltest88@gmail.com'
-# my_gmail_password = ''
+# my_gmail_password = 'nljezkzcqivldaaf'
 # sending_mail = 'ridwan.abdulwaheed@yahoo.com'
 # from datetime import *
 #
@@ -23,18 +23,21 @@
 #
 from random import *
 from datetime import *
-from smtplib import *
+import smtplib
 import pandas
 my_gmail = 'racooltest88@gmail.com'
-my_gmail_password = '' # use your password
+my_gmail_password = 'nljezkzcqivldaaf' # use your password
 letters = ['letter_1.txt','letter_2.txt','letter_3.txt']
 current_day = datetime.now().day
 current_month = datetime.now().month
 current_year = datetime.now().year
+
 birthday = pandas.read_csv('birthdays.csv')
 birthday_dic = birthday.to_dict(orient='records')
+
 names = [{'name': i['name'], 'age': int(current_year - i['year']), 'email': i['email']} for i in birthday_dic if
          i['month'] == current_month and i['day'] == current_day]
+
 for i in names :
     birthday_letter = choice(letters)
     ready_to_send =''
@@ -42,8 +45,8 @@ for i in names :
     with open(f'letter_templates/{birthday_letter}') as letter :
         check = letter.read()
     ready_to_send = check.replace('[NAME]',i['name'])
-    with SMTP('smtp.gmail.com') as sending :
-        sending.starttls()
-        sending.login(user=my_gmail,password=my_gmail_password)
-        sending.sendmail(from_addr=my_gmail,to_addrs=i['email'], msg= f'Subject:Happy Birthday You Are {age} Today !\n\n{ready_to_send}')
-
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+    s.login(user=my_gmail,password=my_gmail_password)
+    s.sendmail(from_addr=my_gmail,to_addrs=i['email'], msg= f'Subject:Happy Birthday You Are {age} Today !\n\n{ready_to_send}')
+    s.quit()
